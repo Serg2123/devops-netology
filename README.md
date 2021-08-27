@@ -1,5 +1,6 @@
 # devops-netology
 First Record
+Second Record for "fix" branch
 
 по добавленному в корне .gitignore ничего не будет игнорироваться, т.к. он пустой
 будут применяться следующие правила игнорирования для файлов в поддиректории terraform (т.к. там .gitignore не пустой и со смыслом):
