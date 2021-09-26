@@ -1,4 +1,5 @@
 Операционные системы, #2  
+  
 1.  т.к. в системе отсустсововал Node_explorer то выполним его доустановку, причем ставится он вместе с прометеус..
     sudo apt install prometheus-node-exporter  
     он конечно насоздавал кучу своих конфигураций(юнитов) и положил все сюда, в дефолтный каталог для юнитов сервисов установленных из готовых пакетов:..
@@ -17,8 +18,8 @@
 	SendSIGKILL=no  
 	[Install]  
 	WantedBy=multi-user.target  
-    порядок запуска службы и зависимости от внешних сервисов определяется в разделе [Service], за старт отвечет параметр ExecStart  
-    включение в автозагрузку осуществляется через активацией самого юнита:  
+    Порядок запуска службы определяется в разделе [Service], за старт отвечет параметр ExecStart  
+    Включение в автозагрузку осуществляется через активацию самого юнита:  
     root@vagrant:/etc/systemd/system# systemctl enable node-exporter.service  
     Created symlink /etc/systemd/system/multi-user.target.wants/node-exporter.service → /etc/systemd/system/node-exporter.service.  
     Добавление опций к запускаемому сервису через внешний файл осуществляется через ключ -f $EXTRA_OPTS  
@@ -33,7 +34,7 @@
          CGroup: /system.slice/node-exporter.service  
                  └─589 /usr/bin/prometheus-node-exporter  
     Sep 24 20:07:24 vagrant prometheus-node-exporter[589]: time="2021-09-24T20:07:24Z" level=info msg="   
-2. исходя из примеров документаци на prometheus можно взять следующее параметры для оперативного онлайн мониторинга:  
+2. Исходя из примеров документации на prometheus можно взять следующие параметры для оперативного онлайн мониторинга:  
     rate(node_cpu_seconds_total{mode="system"}[1m]) # среднее кол-во процессорного времени, затраченного в системном режиме, в секунду за последнюю минуту  
     node_memory_MemTotal_bytes - node_memory_Buffers_bytes - node_memory_Cached_bytes - node_memory_MemFree_bytes  # вычисляемое значение используемой памяти  
     node_filesystem_avail_bytes # колво места доступного пользователям за исключеним root  
@@ -82,7 +83,3 @@
     примерно так: systemctl set-property [имя контейнера/объекта] "CPUShares=200" "CPUQuota=30%" "MemoryLimit=500M"  
     В нашем случае должно быть что-то подобное:  
     systemctl set-property user-1000.slice "CPUQuota=50%"  
-
-
-
-
