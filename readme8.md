@@ -1,6 +1,7 @@
 1. telnet route-server.opentransit.net  
 rviews|Rviews  
   
+```
 OAKRS1#show ip route 109.252.138.35 255.255.255.255  
 % Subnet not in table  
 OAKRS1#show ip route 109.252.138.35  
@@ -15,7 +16,10 @@ Routing entry for 109.252.0.0/16
       Route tag 3356  
       MPLS label: none  
       MPLS Flags: NSF  
-  
+```
+ 
+
+```
 OAKRS1#show bgp 109.252.138.35  
 BGP routing table entry for 109.252.0.0/16, version 347670  
 Paths: (10 available, best #8, table default)  
@@ -47,7 +51,7 @@ Multipath: eBGP
     4.68.70.173 from 193.251.245.237 (172.25.4.176)  
       Origin IGP, metric 100, localpref 85, valid, internal  
  --More--  
-  
+```
 2. создадим новый конфиг для netplan /etc/netplan/02-dummy.yaml:  
 ```
 network:  
@@ -64,6 +68,7 @@ network:
 ```
 Применим его чезер netplan generate и apply.  
 Проверим наличие:  
+```
 vagrant@vagrant:~/devops-netology$ ip -c a  
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000  
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00  
@@ -89,10 +94,12 @@ vagrant@vagrant:~/devops-netology$ ip -c a
        valid_lft forever preferred_lft forever  
     inet6 fe80::a4da:c9ff:fe0d:b694/64 scope link  
        valid_lft forever preferred_lft forever  
+```
 Создадим пару статических маршрутов:  
 vagrant@vagrant:~/devops-netology$ sudo ip route add 169.254.1.1 via 192.168.200.1  
 vagrant@vagrant:~/devops-netology$ sudo ip route add 169.254.1.0/24 dev eth1 metric 50  
 Проверим маршруты:  
+```
 vagrant@vagrant:~/devops-netology$ ip route list  
 default via 10.0.2.2 dev eth0 proto dhcp src 10.0.2.15 metric 100  
 default via 192.168.200.1 dev eth1 proto dhcp src 192.168.200.189 metric 100  
@@ -102,8 +109,9 @@ default via 192.168.200.1 dev eth1 proto dhcp src 192.168.200.189 metric 100
 169.254.1.1 via 192.168.200.1 dev eth1  
 192.168.200.0/24 dev eth1 proto kernel scope link src 192.168.200.189  
 192.168.200.1 dev eth1 proto dhcp scope link src 192.168.200.189 metric 100  
-  
+```
 Еще можно так:  
+```
 vagrant@vagrant:~/devops-netology$ netstat -r  
 Kernel IP routing table  
 Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface  
@@ -115,8 +123,10 @@ _gateway        0.0.0.0         255.255.255.255 UH        0 0          0 eth0
 vagrant         router.asus.com 255.255.255.255 UGH       0 0          0 eth1  
 192.168.200.0   0.0.0.0         255.255.255.0   U         0 0          0 eth1  
 router.asus.com 0.0.0.0         255.255.255.255 UH        0 0          0 eth1  
-  
-3. vagrant@vagrant:~/devops-netology$ netstat -atlpn  
+```
+3. 
+```
+vagrant@vagrant:~/devops-netology$ netstat -atlpn  
 (Not all processes could be identified, non-owned process info  
  will not be shown, you would have to be root to see it all.)  
 Active Internet connections (servers and established)  
@@ -140,13 +150,17 @@ tcp6       0      0 ::1:55780               ::1:9090                ESTABLISHED 
 tcp6       0      0 ::1:46480               ::1:9100                ESTABLISHED -  
 tcp6       0      0 ::1:9090                ::1:55780               ESTABLISHED -  
 tcp6       0      0 127.0.0.1:9090          127.0.0.1:43822         ESTABLISHED -  
+```
+
 Запущен телнет с пид 3505 подключенный на 204.59.3.28.  
 23 - стандартный порт для подключения по Telnet  
 22 - стандартный порт для подключения по ssh  
 53 - стандантный порт для DNS  
 111 - порт для удаленного вызова SUNRPC  
   
-4. vagrant@vagrant:~/devops-netology$ netstat -aulpn  
+4.
+```
+vagrant@vagrant:~/devops-netology$ netstat -aulpn  
 (Not all processes could be identified, non-owned process info  
  will not be shown, you would have to be root to see it all.)  
 Active Internet connections (servers and established)  
@@ -158,6 +172,7 @@ udp        0      0 0.0.0.0:111             0.0.0.0:*                           
 udp        0      0 127.0.0.1:8125          0.0.0.0:*                           -  
 udp6       0      0 :::111                  :::*                                -  
 udp6       0      0 ::1:8125                :::*                                -  
+```
 приложений использующих UDP - нет.
   
 5. https://drive.google.com/file/d/1_AxHYypAUPF8T6Uslc69m2IXbmJRwZAN/view?usp=sharing  
