@@ -49,6 +49,7 @@ Multipath: eBGP
  --More--  
   
 2. создадим новый конфиг для netplan /etc/netplan/02-dummy.yaml:  
+```
 network:  
   version: 2  
   renderer: networkd  
@@ -60,8 +61,9 @@ network:
       interfaces: [ ]  
       addresses:  
         - 169.254.1.1/32  
+```
 Применим его чезер netplan generate и apply.  
-проверим наличие:  
+Проверим наличие:  
 vagrant@vagrant:~/devops-netology$ ip -c a  
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000  
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00  
