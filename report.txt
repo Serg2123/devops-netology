@@ -1,0 +1,44 @@
+[1m
+###########################################################
+    testssl.sh       3.1dev from [m[1mhttps://testssl.sh/dev/[m
+[1m    ([m[1;30m1a66155 2021-10-25 19:02:07 -- [m[1m)[m
+[1m
+      This program is free software. Distribution and
+             modification under GPLv2 permitted.
+      USAGE w/o ANY WARRANTY. USE IT AT YOUR OWN RISK!
+
+       Please file bugs @ [m[1mhttps://testssl.sh/bugs/[m
+[1m
+###########################################################[m
+
+ Using "OpenSSL 1.0.2-chacha (1.0.2k-dev)" [~183 ciphers]
+ on vagrant:./bin/openssl.Linux.x86_64
+ (built: "Jan 18 17:12:17 2019", platform: "linux-x86_64")
+
+
+[7m Start 2021-10-26 15:23:21        -->> 192.168.200.189:443 (some.moscow) <<--[m
+
+ A record via:           /etc/hosts 
+ rDNS (192.168.200.189): some.moscow.
+ Service detected:       HTTP
+
+
+
+[1m[4m Testing all 183 locally available ciphers against the server, ordered by encryption strength [m
+
+
+Hexcode  Cipher Suite Name (OpenSSL)       KeyExch.   Encryption  Bits     Cipher Suite Name (IANA/RFC)
+-----------------------------------------------------------------------------------------------------------------------------
+ xc030   ECDHE-RSA-AES256-GCM-SHA384       ECDH[0;32m 256[m   AESGCM      256      TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384              
+ xc028   ECDHE-RSA-AES256-SHA384           ECDH[0;32m 256[m   AES         256      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384              
+ xc014   ECDHE-RSA-AES256-SHA              ECDH[0;32m 256[m   AES         256      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA                 
+ x9f     DHE-RSA-AES256-GCM-SHA384         DH[0;32m 2048[m    AESGCM      256      TLS_DHE_RSA_WITH_AES_256_GCM_SHA384                
+ x6b     DHE-RSA-AES256-SHA256             DH[0;32m 2048[m    AES         256      TLS_DHE_RSA_WITH_AES_256_CBC_SHA256                
+ x39     DHE-RSA-AES256-SHA                DH[0;32m 2048[m    AES         256      TLS_DHE_RSA_WITH_AES_256_CBC_SHA                   
+ xc02f   ECDHE-RSA-AES128-GCM-SHA256       ECDH[0;32m 256[m   AESGCM      128      TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256              
+ x9e     DHE-RSA-AES128-GCM-SHA256         DH[0;32m 2048[m    AESGCM      128      TLS_DHE_RSA_WITH_AES_128_GCM_SHA256                
+
+
+[7m Done 2021-10-26 15:23:24 [   5s] -->> 192.168.200.189:443 (some.moscow) <<--[m
+
+
