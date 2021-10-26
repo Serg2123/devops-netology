@@ -41,10 +41,10 @@ AuthorizedKeysFile	%h/ .ssh/authorized_keys .ssh/authorized_keys2
   
 6. Переименуем /home/vagrant/.ssh/id_rsa в /home/vagrant/.ssh/id_rsa.bak  
 Добавим в файл /etc/ssh/ssh_config в конец:  
-``
-Host some.moscow  
+```
+Host some.moscow
     IdentityFile /home/vagrant/.ssh/id_rsa.bak  
-``
+```
 и далее в итоге:  
 ```
 vagrant@vagrant:~$ ssh some.moscow
