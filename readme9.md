@@ -70,7 +70,7 @@ vagrant@vagrant:~$
 ```
 7. Захватим 100 пакетов в файл:  
 ```
-sudo tcpdump -c 100 -nn -v -w trafic.pcap  
+sudo tcpdump -c 100 -nn -v -w trafic.bin.pcap  
 ```
 откроем дамп консольным вариантом Wireshark:  
 ```
