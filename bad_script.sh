@@ -6,7 +6,7 @@ declare -i crash_time=0
 declare -i current_time=0
 declare -i last_current_time=0
 declare -i uniq_crash_code=0
-
+ 
 while ((1==1))
     do
 	curl --insecure -I https://localhost:443
