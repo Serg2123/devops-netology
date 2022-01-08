@@ -1,7 +1,7 @@
-1. Поднятие инстанса c MySQL (версии 8) c 3 volume:  
+1. Поднятие инстанса c MySQL (версии 8) c 4 volume:  
 [docker-compose манифест](https://github.com/Serg2123/devops-netology/blob/main/docker-compose-mysql.yml)  
   
-Подключаемся в консоль и восстанавливается из бекапа в базу данных netolody-db (хотя в бекапе указана test_db, но через компосер мы уже создали для тестовых целей netology-db, еще и как оказалось с некомендуемым символом ` - `):  
+Подключаемся в консоль и восстанавливается из бекапа в базу данных netolody-db (хотя в бекапе указана test_db, но через компосер мы уже создали для тестовых целей netology-db, еще и как оказалось с некомендуемым символом "-"):  
 ```
 mysql -u vagrant -p netology-db < /var/lib/mysql-backup/test_dump.sql
 ```
@@ -72,7 +72,7 @@ mysql> show variables like 'default_authentication_plugin';
 +-------------------------------+-----------------------+
 1 row in set (0.01 sec)
 ```
-Создим пользователя test в БД netology-db c паролем test-pass:  
+Создим пользователя test в БД netology-db c паролем test-pass и всеми требуемыми параметрами и атрибутами:  
 ```
 mysql> CREATE USER 'test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test-pass'
     -> WITH MAX_QUERIES_PER_HOUR 100
@@ -81,12 +81,12 @@ mysql> CREATE USER 'test'@'localhost' IDENTIFIED WITH mysql_native_password BY '
     -> ATTRIBUTE '{"Last_name": "Pretty", "First_name": "James"}';
 Query OK, 0 rows affected (0.00 sec)
 ```
-Выдадим права на SECELT (используем кавычки ` `, т.е. был использован знак - в названии БД):  
+Выдадим права на SELECT (используем доп.кавычки, т.к. был использован знак "-" в названии БД):  
 ```
 mysql> GRANT SELECT ON `netology-db`.* to 'test'@'localhost';
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 ```
-Получавем информацию о пользователе:
+Получаем информацию о пользователе:
 ```
 mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE user = 'test';
 +------+-----------+------------------------------------------------+
@@ -292,14 +292,14 @@ mysql> show profile for query 17;
 ```
   
 4. Конфиг my.cnf:  
-[итоговый когфиг](https://github.com/Serg2123/devops-netology/blob/main/my.cnf)  
+[итоговый конфиг](https://github.com/Serg2123/devops-netology/blob/main/my.cnf)  
 Скорость IO важнее надежности данных: innodb_flush_method = O_DSYNC.  
-По сжатию, сначала включаем innodb_file_per_table = 1 чтоб каждую таблицу в отдельном файле, потом можно при необходимости отдельные таблицы пожать.  
+По сжатию, сначала включаем innodb_file_per_table = 1 чтоб каждую таблицу вести в отдельном файле, потом можно при необходимости отдельные таблицы пожать.  
 Размер буфера незаконченных транзакций - innodb_log_buffer_size = 1M.  
-Размер буфера кеширования в 30%: сейчас виртуалке в контейнере определен всего 1G, 30% от 1GB это 300MB, но на виртуалке уже сейчас сводобного только 82MB, т.е. это 8,2%, предлагается выставить хотя бы 10%: innodb_buffer_pool_size = 10M
+Размер буфера кеширования в 30%: сейчас виртуалке в контейнере определен всего 1G, 30% от 1GB это 300MB, но на виртуалке уже сейчас сводобного только 82MB, т.е. это 8,2%, предлагается выставить хотя бы 10%: innodb_buffer_pool_size = 10M  
 Размер файла логов операций innodb_log_file_size = 100M.  
 По идее чем больше innodb_log_file_size тем выше IO, но и делать бесконечно большим данный лог так же нет смысла. В инете есть хорошие исследования и расчеты с разными алгоритмами как правильно вычислить innodb_log_file_size, например, эта статья: https://blog.programs74.ru/how-to-change-innodb_log_file_size-safely/   
-Текущее значение до изменения около 50 МБ:
+Текущее значение до изменения около 50 МБ:  
 ```
 mysql> show variables like 'innodb_log_file_size';
 +----------------------+----------+

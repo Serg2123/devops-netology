@@ -7,7 +7,7 @@ services:
       MYSQL_USER: 'vagrant'
       MYSQL_PASSWORD: 'vagrant'
       MYSQL_DATABASE: 'netology-db'
-      MYSQL_ROOT_PASSWORD: 'v@gr@nt'
+      MYSQL_ROOT_PASSWORD: 'xxxxxxx'
     volumes:
       - ./dbdata:/var/lib/mysql
       - ./mysql/my.cnf:/etc/mysql/my.cnf
