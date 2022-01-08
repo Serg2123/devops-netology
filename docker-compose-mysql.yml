@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  mysqldb:
+    image: mysql/mysql-server:8.0
+    restart: always
+    environment:
+      MYSQL_USER: 'vagrant'
+      MYSQL_PASSWORD: 'vagrant'
+      MYSQL_DATABASE: 'netology-db'
+      MYSQL_ROOT_PASSWORD: 'v@gr@nt'
+    volumes:
+      - ./dbdata:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./Init Database:/docker-entrypoint-initdb.d
+      - ./backup:/var/lib/mysql-backup
+    ports:
+      - "3308:3306"
