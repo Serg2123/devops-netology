@@ -1,5 +1,5 @@
 1.  
-[докер образ](https://hub.docker.com/repository/docker/serg2123/elastic-custom)  
+[докер образ](https://hub.docker.com/r/serg2123/elastic-custom)  
 [Dockerfile](https://github.com/Serg2123/devops-netology/blob/main/elastic/Dockerfile)  
 [elasticsearch конфиг](https://github.com/Serg2123/devops-netology/blob/main/elastic/elasticsearch.yml)  
 [elastic ответ в json](https://github.com/Serg2123/devops-netology/blob/main/elastic/elastic.json)  
@@ -74,7 +74,7 @@ vagrant@server4:~/Elastic$ curl -X DELETE "localhost:9200/ind-3?pretty"
   "acknowledged" : true
 }
 ```
-проверка что индексов нет:  
+проверка что наших индексов нет (только служебные):  
 ```
 vagrant@server4:~/Elastic$ curl -X GET "192.168.200.163:9200/_cat/indices?v&pretty"
 health status index            uuid                   pri rep docs.count docs.deleted store.size pri.store.size
