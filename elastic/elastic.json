@@ -1,0 +1,17 @@
+{
+  "name" : "netology_test",
+  "cluster_name" : "elastic-cluster",
+  "cluster_uuid" : "XN1Fy2UfQU27zeSji7iXkQ",
+  "version" : {
+    "number" : "7.16.3",
+    "build_flavor" : "default",
+    "build_type" : "tar",
+    "build_hash" : "4e6e4eab2297e949ec994e688dad46290d018022",
+    "build_date" : "2022-01-06T23:43:02.825887787Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.10.1",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
